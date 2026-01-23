@@ -1,0 +1,100 @@
+🦋 PAPILLON GUADELOUPE - INSTRUCTIONS D'INSTALLATION
+=====================================================
+
+📦 CONTENU DU DOSSIER
+---------------------
+Vous avez téléchargé le dossier complet "papillon-guadeloupe" qui contient :
+- package.json (configuration du projet)
+- public/ (fichiers publics)
+- src/ (code source du site)
+- README.md (documentation)
+- .gitignore (fichiers à ignorer)
+
+🚀 ÉTAPES D'INSTALLATION (FACILE !)
+-----------------------------------
+
+ÉTAPE 1 : INSTALLER NODE.JS (si pas déjà installé)
+--------------------------------------------------
+1. Aller sur : https://nodejs.org/
+2. Télécharger la version LTS (recommandée)
+3. Installer Node.js (cliquer sur "Next" plusieurs fois)
+4. Vérifier l'installation :
+   - Ouvrir PowerShell
+   - Taper : node --version
+   - Vous devriez voir : v18.x.x ou similaire
+
+ÉTAPE 2 : OUVRIR LE TERMINAL DANS LE BON DOSSIER
+------------------------------------------------
+1. Ouvrir l'explorateur Windows
+2. Naviguer vers le dossier "papillon-guadeloupe"
+3. Dans la barre d'adresse en haut, taper : powershell
+4. Appuyer sur Entrée
+   → PowerShell s'ouvre directement dans ce dossier !
+
+ÉTAPE 3 : INSTALLER LES DÉPENDANCES
+-----------------------------------
+Dans PowerShell, taper cette commande :
+
+npm install
+
+⏳ Cela va télécharger tous les packages nécessaires (ça prend 2-3 minutes)
+
+ÉTAPE 4 : LANCER LE SITE
+------------------------
+Une fois l'installation terminée, taper :
+
+npm start
+
+✅ Le site va s'ouvrir automatiquement dans votre navigateur à l'adresse :
+   http://localhost:3000
+
+🎉 VOILÀ ! VOTRE SITE EST LANCÉ !
+---------------------------------
+
+💡 COMMANDES UTILES
+-------------------
+- npm start      → Lance le site en développement
+- npm run build  → Compile le site pour la production
+- CTRL + C       → Arrêter le serveur
+
+⚠️ SI VOUS AVEZ DES ERREURS
+---------------------------
+
+ERREUR : "npm n'est pas reconnu"
+→ Node.js n'est pas installé. Retour à l'ÉTAPE 1.
+
+ERREUR : "ENOENT: no such file or directory"
+→ Vous n'êtes pas dans le bon dossier. Retour à l'ÉTAPE 2.
+
+ERREUR : "Module not found"
+→ Les dépendances ne sont pas installées. Retour à l'ÉTAPE 3.
+
+ERREUR : "Port 3000 is already in use"
+→ Un autre serveur utilise le port 3000
+→ Solution : Fermer l'autre serveur ou utiliser : npm start -- --port 3001
+
+📱 STRUCTURE DU SITE
+--------------------
+Le site contient 9 pages complètes :
+1. Accueil (page principale)
+2. Services (Particuliers & Professionnels)
+3. Réalisations (Before/After avec sliders)
+4. Processus (Méthodologie en 3 étapes)
+5. Entretien Paysager
+6. Location Motoculteur
+7. FAQ (21 questions/réponses)
+8. Contact (formulaire complet)
+9. À Propos (histoire & équipe)
+
+✨ Toutes les pages sont fonctionnelles avec navigation, animations et design responsive !
+
+🆘 BESOIN D'AIDE ?
+-----------------
+Si vous rencontrez des problèmes, vérifiez :
+1. Node.js est bien installé (node --version)
+2. Vous êtes dans le bon dossier (cd papillon-guadeloupe)
+3. npm install a bien fonctionné (regardez si le dossier node_modules existe)
+
+📧 Contact : papillonguadeloupe1@gmail.com
+
+© 2025 PAPILLON GUADELOUPE SASU - SIRET: 830 230 603 00011
