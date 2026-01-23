@@ -1,0 +1,52 @@
+backend:
+  name: git-gateway
+  branch: main
+
+publish_mode: editorial_workflow
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "pages"
+    label: "📄 Pages"
+    files:
+      - label: "Page d'accueil"
+        name: "accueil"
+        file: "content/accueil.json"
+        fields:
+          - label: "Section Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Titre", name: "title", widget: "string"}
+              - {label: "Sous-titre", name: "subtitle", widget: "string"}
+              - {label: "Texte bouton", name: "button_text", widget: "string"}
+          
+          - label: "Présentation"
+            name: "presentation"
+            widget: "object"
+            fields:
+              - {label: "Titre", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+
+      - label: "Contact"
+        name: "contact"
+        file: "content/contact.json"
+        fields:
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Téléphone", name: "phone", widget: "string"}
+          - {label: "Zone d'intervention", name: "zone", widget: "string"}
+          - {label: "Tarif visite conseil", name: "tarif_visite", widget: "string"}
+
+  - name: "settings"
+    label: "⚙️ Paramètres"
+    files:
+      - label: "Informations générales"
+        name: "general"
+        file: "content/settings.json"
+        fields:
+          - {label: "Nom de l'entreprise", name: "company_name", widget: "string"}
+          - {label: "SIRET", name: "siret", widget: "string"}
+          - {label: "Email principal", name: "email", widget: "string"}
+          - {label: "Téléphone", name: "phone", widget: "string"}
