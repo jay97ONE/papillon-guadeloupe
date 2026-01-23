@@ -6,6 +6,25 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
+  # Paramètres généraux du site
+  - name: "settings"
+    label: "⚙️ Paramètres du site"
+    files:
+      - label: "Paramètres généraux"
+        name: "general"
+        file: "content/settings/site.md"
+        fields:
+          - {label: "Nom du site", name: "site_name", widget: "string"}
+          - {label: "Description", name: "site_description", widget: "text"}
+          - {label: "Logo", name: "logo", widget: "image"}
+          - {label: "Téléphone", name: "phone", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Adresse", name: "address", widget: "text"}
+          - {label: "Facebook", name: "facebook", widget: "string", required: false}
+          - {label: "Instagram", name: "instagram", widget: "string", required: false}
+          - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+
+  # Pages principales
   - name: "pages"
     label: "📄 Pages du site"
     files:
@@ -13,40 +32,114 @@ collections:
         name: "home"
         file: "content/pages/home.md"
         fields:
-          - {label: "Titre", name: "title", widget: "string"}
-          - {label: "Sous-titre", name: "subtitle", widget: "string"}
-          - {label: "Image de fond", name: "hero_image", widget: "image"}
-          - {label: "Texte du bouton", name: "button_text", widget: "string"}
-          - {label: "Description", name: "body", widget: "markdown"}
+          - label: "Section Héro"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Titre principal", name: "title", widget: "string"}
+              - {label: "Sous-titre", name: "subtitle", widget: "string"}
+              - {label: "Image de fond", name: "background_image", widget: "image"}
+              - {label: "Texte du bouton", name: "button_text", widget: "string"}
+              - {label: "Lien du bouton", name: "button_link", widget: "string"}
+          
+          - label: "Section Présentation"
+            name: "presentation"
+            widget: "object"
+            fields:
+              - {label: "Titre", name: "title", widget: "string"}
+              - {label: "Texte", name: "text", widget: "markdown"}
+              - {label: "Image", name: "image", widget: "image"}
+          
+          - label: "Section Chiffres clés"
+            name: "stats"
+            widget: "object"
+            fields:
+              - {label: "Années d'expérience", name: "years", widget: "number"}
+              - {label: "Projets réalisés", name: "projects", widget: "number"}
+              - {label: "Clients satisfaits", name: "clients", widget: "number"}
+      
       - label: "À propos"
         name: "about"
         file: "content/pages/about.md"
         fields:
           - {label: "Titre", name: "title", widget: "string"}
-          - {label: "Image", name: "image", widget: "image"}
+          - {label: "Image principale", name: "image", widget: "image"}
           - {label: "Contenu", name: "body", widget: "markdown"}
+          - label: "Notre équipe"
+            name: "team"
+            widget: "list"
+            fields:
+              - {label: "Nom", name: "name", widget: "string"}
+              - {label: "Poste", name: "role", widget: "string"}
+              - {label: "Photo", name: "photo", widget: "image"}
+              - {label: "Description", name: "bio", widget: "text"}
+      
       - label: "Contact"
         name: "contact"
         file: "content/pages/contact.md"
         fields:
           - {label: "Titre", name: "title", widget: "string"}
-          - {label: "Email", name: "email", widget: "string"}
-          - {label: "Téléphone", name: "phone", widget: "string"}
-          - {label: "Adresse", name: "address", widget: "text"}
-          - {label: "Contenu", name: "body", widget: "markdown"}
+          - {label: "Texte d'introduction", name: "intro", widget: "markdown"}
+          - label: "Horaires"
+            name: "hours"
+            widget: "object"
+            fields:
+              - {label: "Lundi-Vendredi", name: "weekdays", widget: "string"}
+              - {label: "Samedi", name: "saturday", widget: "string"}
+              - {label: "Dimanche", name: "sunday", widget: "string"}
 
-  - name: "services"
-    label: "🛠️ Services"
-    folder: "content/services"
+  # Services pour particuliers
+  - name: "services-particuliers"
+    label: "🏠 Services Particuliers"
+    folder: "content/services/particuliers"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Nom du service", name: "title", widget: "string"}
-      - {label: "Icône", name: "icon", widget: "image"}
-      - {label: "Description courte", name: "excerpt", widget: "text"}
-      - {label: "Description complète", name: "body", widget: "markdown"}
-      - {label: "Prix indicatif", name: "price", widget: "string", required: false}
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Prix", name: "price", widget: "string"}
+      - {label: "Durée", name: "duration", widget: "string"}
+      - {label: "Image/Icône", name: "icon", widget: "image", required: false}
+      - label: "Services inclus"
+        name: "includes"
+        widget: "list"
+        field: {label: "Service", name: "item", widget: "string"}
 
+  # Services pour professionnels
+  - name: "services-professionnels"
+    label: "🏢 Services Professionnels"
+    folder: "content/services/professionnels"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Prix", name: "price", widget: "string"}
+      - {label: "Durée", name: "duration", widget: "string"}
+      - {label: "Image/Icône", name: "icon", widget: "image", required: false}
+      - label: "Services inclus"
+        name: "includes"
+        widget: "list"
+        field: {label: "Service", name: "item", widget: "string"}
+
+  # Documents inclus
+  - name: "documents"
+    label: "📋 Documents inclus"
+    files:
+      - label: "Liste des documents"
+        name: "documents-list"
+        file: "content/data/documents.md"
+        fields:
+          - label: "Documents papiers"
+            name: "papiers"
+            widget: "list"
+            field: {label: "Document", name: "item", widget: "string"}
+          - label: "Documents numériques"
+            name: "numeriques"
+            widget: "list"
+            field: {label: "Document", name: "item", widget: "string"}
+
+  # Réalisations
   - name: "realisations"
     label: "✅ Réalisations"
     folder: "content/realisations"
@@ -56,11 +149,17 @@ collections:
       - {label: "Titre du projet", name: "title", widget: "string"}
       - {label: "Date", name: "date", widget: "datetime"}
       - {label: "Lieu", name: "location", widget: "string"}
-      - {label: "Type de service", name: "service_type", widget: "select", options: ["Motoculteur", "Entretien jardin", "Création jardin", "Taille haies", "Autre"]}
+      - {label: "Type de service", name: "service_type", widget: "select", options: ["Particuliers", "Professionnels"]}
       - {label: "Description", name: "body", widget: "markdown"}
       - {label: "Photo AVANT", name: "before_image", widget: "image"}
       - {label: "Photo APRÈS", name: "after_image", widget: "image"}
+      - label: "Galerie photos supplémentaires"
+        name: "gallery"
+        widget: "list"
+        field: {label: "Photo", name: "image", widget: "image"}
+        required: false
 
+  # Photos Avant/Après
   - name: "avant-apres"
     label: "📸 Avant/Après"
     folder: "content/avant-apres"
@@ -73,6 +172,7 @@ collections:
       - {label: "Photo APRÈS", name: "after", widget: "image"}
       - {label: "Description", name: "description", widget: "text"}
 
+  # Témoignages
   - name: "testimonials"
     label: "💬 Témoignages"
     folder: "content/testimonials"
@@ -84,3 +184,4 @@ collections:
       - {label: "Note sur 5", name: "rating", widget: "number", min: 1, max: 5, default: 5}
       - {label: "Témoignage", name: "body", widget: "text"}
       - {label: "Service concerné", name: "service", widget: "string", required: false}
+      - {label: "Photo du client", name: "photo", widget: "image", required: false}
