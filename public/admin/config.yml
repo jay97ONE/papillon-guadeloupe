@@ -6,163 +6,511 @@ media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "settings"
+  # ========================================
+  # PARAMÈTRES GÉNÉRAUX DU SITE
+  # ========================================
+  - name: "site-settings"
     label: "⚙️ Paramètres du site"
     files:
       - label: "Informations générales"
         name: "general"
-        file: "content/settings/site.md"
+        file: "content/settings/general.md"
         fields:
-          - {label: "Nom du site", name: "site_name", widget: "string"}
+          - {label: "Nom du site", name: "site_name", widget: "string", default: "Papillon Guadeloupe"}
+          - {label: "Slogan", name: "tagline", widget: "string"}
+          - {label: "Logo principal (header)", name: "logo", widget: "image"}
+          - {label: "Logo footer", name: "logo_footer", widget: "image"}
+          - {label: "Favicon", name: "favicon", widget: "image"}
           - {label: "Téléphone", name: "phone", widget: "string"}
           - {label: "Email", name: "email", widget: "string"}
-
-  - name: "theme"
-    label: "🎨 Design et couleurs"
-    files:
-      - label: "Thème visuel"
-        name: "design"
-        file: "content/theme/design.md"
+          - {label: "Adresse complète", name: "address", widget: "text"}
+          - {label: "Facebook URL", name: "facebook", widget: "string", required: false}
+          - {label: "Instagram URL", name: "instagram", widget: "string", required: false}
+          - {label: "LinkedIn URL", name: "linkedin", widget: "string", required: false}
+      
+      - label: "Couleurs du thème"
+        name: "colors"
+        file: "content/settings/colors.md"
         fields:
-          - {label: "Couleur principale", name: "primary_color", widget: "color"}
-          - {label: "Logo principal", name: "logo_main", widget: "image"}
+          - {label: "Couleur primaire", name: "primary", widget: "color", default: "#2d5016"}
+          - {label: "Couleur secondaire", name: "secondary", widget: "color", default: "#8bc34a"}
+          - {label: "Couleur accent", name: "accent", widget: "color", default: "#ffa726"}
+          - {label: "Couleur texte", name: "text", widget: "color", default: "#333333"}
+          - {label: "Couleur fond", name: "background", widget: "color", default: "#ffffff"}
 
-  - name: "pages"
-    label: "📄 Pages du site"
+  # ========================================
+  # PAGE D'ACCUEIL - SECTIONS DÉTAILLÉES
+  # ========================================
+  - name: "homepage"
+    label: "🏠 Page d'accueil"
     files:
-      - label: "Page d'accueil"
-        name: "home"
-        file: "content/pages/home.md"
+      - label: "Section 1 - Bannière Héro"
+        name: "hero"
+        file: "content/home/hero.md"
+        fields:
+          - {label: "Titre principal", name: "title", widget: "string", hint: "Ex: Architecte paysagiste de jardins d'exception"}
+          - {label: "Sous-titre", name: "subtitle", widget: "string", hint: "Ex: Spécialiste des Jardins Tropicaux"}
+          - {label: "Image de fond (desktop)", name: "background_image", widget: "image"}
+          - {label: "Image de fond (mobile)", name: "background_image_mobile", widget: "image", required: false}
+          - {label: "Texte du bouton principal", name: "button_text", widget: "string", default: "Demander un devis"}
+          - {label: "Lien du bouton", name: "button_link", widget: "string", default: "#contact"}
+      
+      - label: "Section 2 - Présentation"
+        name: "presentation"
+        file: "content/home/presentation.md"
+        fields:
+          - {label: "Titre de section", name: "title", widget: "string"}
+          - {label: "Paragraphe 1", name: "paragraph1", widget: "markdown"}
+          - {label: "Paragraphe 2", name: "paragraph2", widget: "markdown", required: false}
+          - {label: "Image à droite", name: "image", widget: "image"}
+          - {label: "Texte alternatif image", name: "image_alt", widget: "string"}
+      
+      - label: "Section 3 - Onglets Services"
+        name: "services-tabs"
+        file: "content/home/services-tabs.md"
+        fields:
+          - {label: "Titre de section", name: "title", widget: "string", default: "Nos Services"}
+          - {label: "Sous-titre", name: "subtitle", widget: "text", required: false}
+          - {label: "Nom onglet 1", name: "tab1_name", widget: "string", default: "Particuliers"}
+          - {label: "Nom onglet 2", name: "tab2_name", widget: "string", default: "Professionnels"}
+      
+      - label: "Section 4 - Chiffres Clés"
+        name: "stats"
+        file: "content/home/stats.md"
+        fields:
+          - {label: "Afficher cette section", name: "enabled", widget: "boolean", default: true}
+          - label: "Statistiques"
+            name: "stats"
+            widget: "list"
+            fields:
+              - {label: "Nombre", name: "number", widget: "string"}
+              - {label: "Label", name: "label", widget: "string"}
+              - {label: "Icône (emoji ou classe)", name: "icon", widget: "string", required: false}
+      
+      - label: "Section 5 - Galerie Avant/Après"
+        name: "gallery-preview"
+        file: "content/home/gallery-preview.md"
+        fields:
+          - {label: "Titre", name: "title", widget: "string", default: "Des transformations spectaculaires"}
+          - {label: "Sous-titre", name: "subtitle", widget: "text"}
+          - {label: "Texte bouton", name: "button_text", widget: "string", default: "Voir toutes nos réalisations"}
+      
+      - label: "Section 6 - Témoignages"
+        name: "testimonials-section"
+        file: "content/home/testimonials.md"
+        fields:
+          - {label: "Titre", name: "title", widget: "string", default: "Ce que disent nos clients"}
+          - {label: "Nombre de témoignages affichés", name: "display_count", widget: "number", default: 3}
+      
+      - label: "Section 7 - Appel à l'action final"
+        name: "final-cta"
+        file: "content/home/final-cta.md"
         fields:
           - {label: "Titre", name: "title", widget: "string"}
-          - {label: "Contenu", name: "body", widget: "markdown"}
+          - {label: "Texte", name: "text", widget: "text"}
+          - {label: "Texte bouton 1", name: "button1_text", widget: "string"}
+          - {label: "Lien bouton 1", name: "button1_link", widget: "string"}
+          - {label: "Texte bouton 2", name: "button2_text", widget: "string", required: false}
+          - {label: "Lien bouton 2", name: "button2_link", widget: "string", required: false}
+          - {label: "Image de fond", name: "background_image", widget: "image", required: false}
 
-  - name: "entretien"
+  # ========================================
+  # PAGE ENTRETIEN PAYSAGER
+  # ========================================
+  - name: "entretien-page"
     label: "🌿 Entretien Paysager"
     files:
-      - label: "Page Entretien"
-        name: "entretien"
-        file: "content/pages/entretien.md"
+      - label: "Bannière de la page"
+        name: "entretien-hero"
+        file: "content/pages/entretien/hero.md"
         fields:
-          - {label: "Titre", name: "title", widget: "string"}
-          - {label: "Contenu", name: "body", widget: "markdown"}
+          - {label: "Titre H1", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "string"}
+          - {label: "Image de fond", name: "hero_image", widget: "image"}
+          - {label: "Texte bouton CTA 1", name: "button1_text", widget: "string"}
+          - {label: "Texte bouton CTA 2", name: "button2_text", widget: "string"}
+      
+      - label: "Services Particuliers"
+        name: "entretien-particuliers"
+        file: "content/pages/entretien/particuliers.md"
+        fields:
+          - {label: "Titre section", name: "title", widget: "string"}
+          - {label: "Texte intro", name: "intro", widget: "text"}
+          - label: "Liste des services"
+            name: "services"
+            widget: "list"
+            fields:
+              - {label: "Icône (emoji)", name: "icon", widget: "string"}
+              - {label: "Nom du service", name: "name", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Prix affiché", name: "price", widget: "string"}
+          - {label: "Note de bas de section", name: "footer_note", widget: "text", required: false}
+      
+      - label: "Services Collectivités"
+        name: "entretien-collectivites"
+        file: "content/pages/entretien/collectivites.md"
+        fields:
+          - {label: "Titre section", name: "title", widget: "string"}
+          - {label: "Texte intro", name: "intro", widget: "text"}
+          - label: "Types de services"
+            name: "services"
+            widget: "list"
+            fields:
+              - {label: "Icône (emoji)", name: "icon", widget: "string"}
+              - {label: "Nom du service", name: "name", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - label: "Points clés"
+                name: "key_points"
+                widget: "list"
+                field: {label: "Point", name: "point", widget: "string"}
+      
+      - label: "Galerie de réalisations"
+        name: "entretien-gallery"
+        file: "content/pages/entretien/gallery.md"
+        fields:
+          - {label: "Titre section", name: "title", widget: "string", default: "Nos Réalisations"}
+          - {label: "Nombre de photos affichées", name: "display_count", widget: "number", default: 6}
 
-  - name: "motoculteur"
+  # ========================================
+  # PAGE LOCATION MOTOCULTEUR
+  # ========================================
+  - name: "motoculteur-page"
     label: "🚜 Location Motoculteur"
     files:
-      - label: "Page Motoculteur"
-        name: "motoculteur"
-        file: "content/pages/motoculteur.md"
+      - label: "Contenu de la page"
+        name: "motoculteur-content"
+        file: "content/pages/motoculteur/main.md"
         fields:
-          - {label: "Titre", name: "title", widget: "string"}
-          - {label: "Prix", name: "price", widget: "string"}
+          - {label: "Titre H1", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "string"}
+          - {label: "Image principale", name: "hero_image", widget: "image"}
+          - {label: "Paragraphe intro", name: "intro", widget: "markdown"}
+          - label: "Caractéristiques du matériel"
+            name: "features"
+            widget: "list"
+            fields:
+              - {label: "Icône", name: "icon", widget: "string"}
+              - {label: "Titre", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+          - label: "Tarification"
+            name: "pricing"
+            widget: "object"
+            fields:
+              - {label: "Prix à la journée", name: "daily_rate", widget: "string"}
+              - {label: "Prix avec opérateur", name: "with_operator", widget: "string"}
+              - {label: "Notes tarifaires", name: "notes", widget: "text"}
+          - {label: "Photo du matériel", name: "equipment_photo", widget: "image"}
+          - {label: "Texte bouton CTA", name: "cta_text", widget: "string", default: "Réserver maintenant"}
 
-  - name: "galerie"
-    label: "📸 Galerie"
+  # ========================================
+  # PAGE GALERIE AVANT/APRÈS
+  # ========================================
+  - name: "galerie-page"
+    label: "📸 Galerie Avant/Après"
     files:
-      - label: "En-tête Galerie"
-        name: "galerie"
-        file: "content/pages/galerie.md"
+      - label: "En-tête de la galerie"
+        name: "galerie-header"
+        file: "content/pages/galerie/header.md"
         fields:
-          - {label: "Titre", name: "title", widget: "string"}
+          - {label: "Titre H1", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "text"}
+          - {label: "Texte filtre 'Tous'", name: "filter_all", widget: "string", default: "Tous"}
+          - {label: "Texte filtre 'Particuliers'", name: "filter_particuliers", widget: "string", default: "Particuliers"}
+          - {label: "Texte filtre 'Professionnels'", name: "filter_professionnels", widget: "string", default: "Professionnels"}
 
-  - name: "projets-galerie"
-    label: "🏗️ Projets Galerie"
-    folder: "content/galerie-projets"
+  - name: "galerie-projets"
+    label: "🏗️ Projets de la Galerie"
+    folder: "content/galerie"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Titre", name: "title", widget: "string"}
-      - {label: "Photo AVANT", name: "before", widget: "image"}
-      - {label: "Photo APRÈS", name: "after", widget: "image"}
+      - {label: "Type de projet", name: "type", widget: "select", options: ["Particulier", "Professionnel"]}
+      - {label: "Photo AVANT", name: "photo_before", widget: "image"}
+      - {label: "Photo APRÈS", name: "photo_after", widget: "image"}
+      - {label: "Titre du projet", name: "title", widget: "string"}
+      - {label: "Lieu", name: "location", widget: "string"}
+      - {label: "Description courte", name: "description", widget: "text"}
+      - label: "Services réalisés"
+        name: "services"
+        widget: "list"
+        field: {label: "Service", name: "service", widget: "string"}
+      - {label: "Position slider (0-100)", name: "slider_position", widget: "number", default: 50, min: 0, max: 100}
+      - {label: "Ordre d'affichage", name: "order", widget: "number", default: 0}
 
-  - name: "processus"
+  # ========================================
+  # PAGE NOTRE PROCESSUS
+  # ========================================
+  - name: "processus-page"
     label: "📋 Notre Processus"
     files:
-      - label: "Processus"
-        name: "processus"
-        file: "content/pages/processus.md"
+      - label: "En-tête de la page"
+        name: "processus-header"
+        file: "content/pages/processus/header.md"
         fields:
+          - {label: "Titre H1", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "text"}
+      
+      - label: "Étape 1 - Analyse & Conception"
+        name: "etape1"
+        file: "content/pages/processus/etape1.md"
+        fields:
+          - {label: "Numéro", name: "number", widget: "number", default: 1}
           - {label: "Titre", name: "title", widget: "string"}
-
-  - name: "livrables"
-    label: "📦 Livrables"
-    files:
-      - label: "Page Livrables"
+          - {label: "Sous-titre", name: "subtitle", widget: "string"}
+          - {label: "Durée", name: "duration", widget: "string"}
+          - {label: "Icône (emoji)", name: "icon", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - label: "Détails de l'étape"
+            name: "details"
+            widget: "list"
+            field: {label: "Détail", name: "item", widget: "string"}
+      
+      - label: "Étape 2 - Création & Visualisation"
+        name: "etape2"
+        file: "content/pages/processus/etape2.md"
+        fields:
+          - {label: "Numéro", name: "number", widget: "number", default: 2}
+          - {label: "Titre", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "string"}
+          - {label: "Durée", name: "duration", widget: "string"}
+          - {label: "Icône (emoji)", name: "icon", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - label: "Détails de l'étape"
+            name: "details"
+            widget: "list"
+            field: {label: "Détail", name: "item", widget: "string"}
+      
+      - label: "Étape 3 - Remise & Accompagnement"
+        name: "etape3"
+        file: "content/pages/processus/etape3.md"
+        fields:
+          - {label: "Numéro", name: "number", widget: "number", default: 3}
+          - {label: "Titre", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "string"}
+          - {label: "Durée", name: "duration", widget: "string"}
+          - {label: "Icône (emoji)", name: "icon", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - label: "Détails de l'étape"
+            name: "details"
+            widget: "list"
+            field: {label: "Détail", name: "item", widget: "string"}
+      
+      - label: "Section Livrables"
         name: "livrables"
-        file: "content/pages/livrables.md"
+        file: "content/pages/processus/livrables.md"
         fields:
-          - {label: "Titre", name: "title", widget: "string"}
-
-  - name: "apres-conception"
-    label: "🔨 Après Conception"
-    files:
-      - label: "Page"
-        name: "apres"
-        file: "content/pages/apres-conception.md"
+          - {label: "Titre section", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "text"}
+          - label: "Catégories de livrables"
+            name: "categories"
+            widget: "list"
+            fields:
+              - {label: "Numéro", name: "number", widget: "number"}
+              - {label: "Titre catégorie", name: "title", widget: "string"}
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                field: {label: "Item", name: "item", widget: "string"}
+      
+      - label: "Section Après la Conception"
+        name: "apres-conception"
+        file: "content/pages/processus/apres-conception.md"
         fields:
-          - {label: "Titre", name: "title", widget: "string"}
-
-  - name: "preparation"
-    label: "📄 Préparation RDV"
-    files:
-      - label: "Page"
-        name: "prep"
-        file: "content/pages/preparation.md"
+          - {label: "Titre section", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "text"}
+          - label: "Options de réalisation"
+            name: "options"
+            widget: "list"
+            fields:
+              - {label: "Icône (emoji)", name: "icon", widget: "string"}
+              - {label: "Titre option", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - label: "Avantages"
+                name: "advantages"
+                widget: "list"
+                field: {label: "Avantage", name: "item", widget: "string"}
+      
+      - label: "Section Préparation"
+        name: "preparation"
+        file: "content/pages/processus/preparation.md"
         fields:
-          - {label: "Titre", name: "title", widget: "string"}
+          - {label: "Titre section", name: "title", widget: "string"}
+          - {label: "Sous-titre", name: "subtitle", widget: "text"}
+          - label: "Documents techniques à préparer"
+            name: "documents_techniques"
+            widget: "list"
+            field: {label: "Document", name: "item", widget: "string"}
+          - label: "Informations complémentaires"
+            name: "infos_complementaires"
+            widget: "list"
+            field: {label: "Information", name: "item", widget: "string"}
+          - {label: "Conseil (encadré)", name: "tip", widget: "text"}
+          - label: "CTA final"
+            name: "final_cta"
+            widget: "object"
+            fields:
+              - {label: "Titre", name: "title", widget: "string"}
+              - {label: "Texte", name: "text", widget: "text"}
+              - {label: "Bouton 1", name: "button1", widget: "string"}
+              - {label: "Bouton 2", name: "button2", widget: "string"}
 
+  # ========================================
+  # SERVICES PARTICULIERS (détaillés)
+  # ========================================
   - name: "services-particuliers"
     label: "🏠 Services Particuliers"
     folder: "content/services/particuliers"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Titre", name: "title", widget: "string"}
-      - {label: "Prix", name: "price", widget: "string"}
+      - {label: "Nom du service", name: "title", widget: "string"}
+      - {label: "Description courte", name: "excerpt", widget: "text"}
+      - {label: "Description complète", name: "description", widget: "markdown"}
+      - {label: "Prix affiché", name: "price", widget: "string"}
+      - {label: "Durée", name: "duration", widget: "string"}
+      - {label: "Icône du service", name: "icon", widget: "image", required: false}
+      - {label: "Ordre d'affichage", name: "order", widget: "number", default: 0}
+      - label: "Services inclus"
+        name: "includes"
+        widget: "list"
+        field: {label: "Service inclus", name: "item", widget: "string"}
 
+  # ========================================
+  # SERVICES PROFESSIONNELS (détaillés)
+  # ========================================
   - name: "services-professionnels"
     label: "🏢 Services Professionnels"
     folder: "content/services/professionnels"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Nom du service", name: "title", widget: "string"}
+      - {label: "Description courte", name: "excerpt", widget: "text"}
+      - {label: "Description complète", name: "description", widget: "markdown"}
+      - {label: "Prix affiché", name: "price", widget: "string"}
+      - {label: "Durée", name: "duration", widget: "string"}
+      - {label: "Icône du service", name: "icon", widget: "image", required: false}
+      - {label: "Ordre d'affichage", name: "order", widget: "number", default: 0}
+      - label: "Services inclus"
+        name: "includes"
+        widget: "list"
+        field: {label: "Service inclus", name: "item", widget: "string"}
 
+  # ========================================
+  # DOCUMENTS INCLUS
+  # ========================================
   - name: "documents"
-    label: "📋 Documents"
+    label: "📋 Documents inclus"
     files:
-      - label: "Documents"
-        name: "docs"
+      - label: "Liste des documents"
+        name: "documents-list"
         file: "content/data/documents.md"
         fields:
-          - {label: "Note", name: "note", widget: "text"}
+          - label: "Documents papiers"
+            name: "papiers"
+            widget: "list"
+            field: {label: "Document", name: "item", widget: "string"}
+          - label: "Documents numériques"
+            name: "numeriques"
+            widget: "list"
+            field: {label: "Document", name: "item", widget: "string"}
 
+  # ========================================
+  # RÉALISATIONS
+  # ========================================
   - name: "realisations"
     label: "✅ Réalisations"
     folder: "content/realisations"
     create: true
-    slug: "{{slug}}"
+    slug: "{{year}}-{{month}}-{{slug}}"
     fields:
-      - {label: "Titre", name: "title", widget: "string"}
-      - {label: "Photo AVANT", name: "before", widget: "image"}
-      - {label: "Photo APRÈS", name: "after", widget: "image"}
+      - {label: "Titre du projet", name: "title", widget: "string"}
+      - {label: "Date de réalisation", name: "date", widget: "datetime"}
+      - {label: "Lieu", name: "location", widget: "string"}
+      - {label: "Type de client", name: "client_type", widget: "select", options: ["Particulier", "Professionnel"]}
+      - {label: "Description", name: "description", widget: "markdown"}
+      - {label: "Photo AVANT", name: "photo_before", widget: "image"}
+      - {label: "Photo APRÈS", name: "photo_after", widget: "image"}
+      - label: "Galerie photos supplémentaires"
+        name: "gallery"
+        widget: "list"
+        field: {label: "Photo", name: "image", widget: "image"}
+        required: false
+      - {label: "Publier sur le site", name: "published", widget: "boolean", default: true}
 
-  - name: "avant-apres"
-    label: "📸 Avant/Après"
-    folder: "content/avant-apres"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - {label: "Titre", name: "title", widget: "string"}
-      - {label: "Photo AVANT", name: "before", widget: "image"}
-      - {label: "Photo APRÈS", name: "after", widget: "image"}
-
+  # ========================================
+  # TÉMOIGNAGES
+  # ========================================
   - name: "testimonials"
     label: "💬 Témoignages"
     folder: "content/testimonials"
     create: true
     slug: "{{slug}}"
     fields:
-      - {label: "Nom", name: "name", widget: "string"}
-      - {label: "Témoignage", name: "body", widget: "text"}
+      - {label: "Nom du client", name: "name", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Note sur 5", name: "rating", widget: "number", min: 1, max: 5, default: 5}
+      - {label: "Témoignage", name: "testimonial", widget: "text"}
+      - {label: "Service concerné", name: "service", widget: "string", required: false}
+      - {label: "Photo du client", name: "photo", widget: "image", required: false}
+      - {label: "Afficher sur page d'accueil", name: "featured", widget: "boolean", default: false}
+
+  # ========================================
+  # PAGE CONTACT
+  # ========================================
+  - name: "contact-page"
+    label: "📞 Contact"
+    files:
+      - label: "Contenu de la page"
+        name: "contact-content"
+        file: "content/pages/contact.md"
+        fields:
+          - {label: "Titre H1", name: "title", widget: "string"}
+          - {label: "Texte d'introduction", name: "intro", widget: "markdown"}
+          - {label: "Texte du formulaire", name: "form_text", widget: "text"}
+          - {label: "Code embed Google Maps", name: "map_embed", widget: "text", required: false}
+
+  # ========================================
+  # MENU DE NAVIGATION
+  # ========================================
+  - name: "navigation"
+    label: "🧭 Menu Navigation"
+    files:
+      - label: "Menu principal"
+        name: "main-menu"
+        file: "content/settings/menu.md"
+        fields:
+          - label: "Liens du menu"
+            name: "menu_items"
+            widget: "list"
+            fields:
+              - {label: "Texte du lien", name: "label", widget: "string"}
+              - {label: "URL ou ancre", name: "url", widget: "string"}
+              - {label: "Ouvrir dans nouvel onglet", name: "external", widget: "boolean", default: false}
+              - {label: "Ordre", name: "order", widget: "number"}
+
+  # ========================================
+  # FOOTER
+  # ========================================
+  - name: "footer"
+    label: "🦶 Pied de page"
+    files:
+      - label: "Contenu du footer"
+        name: "footer-content"
+        file: "content/settings/footer.md"
+        fields:
+          - {label: "Texte présentation", name: "about_text", widget: "text"}
+          - {label: "Copyright", name: "copyright", widget: "string"}
+          - {label: "Lien mentions légales", name: "legal_link", widget: "string", required: false}
+          - {label: "Lien politique confidentialité", name: "privacy_link", widget: "string", required: false}
+          - label: "Colonnes du footer"
+            name: "columns"
+            widget: "list"
+            fields:
+              - {label: "Titre colonne", name: "title", widget: "string"}
+              - label: "Liens"
+                name: "links"
+                widget: "list"
+                fields:
+                  - {label: "Texte", name: "text", widget: "string"}
+                  - {label: "URL", name: "url", widget: "string"}
